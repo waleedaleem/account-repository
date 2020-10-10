@@ -34,11 +34,11 @@ public class AccountController {
         return "accounts";
     }
 
-    @GetMapping("/{accountId}")
-    public String listAccountTransactions(@PathVariable long accountId, Model model) {
-        logger.debug("Listing transactions of account \"{}\"", accountId);
-        model.addAttribute("product", accountService.listAccountTransactions(accountId));
-        logger.debug("Listed transactions of account \"{}\"", accountId);
+    @GetMapping("/{accountNumber}")
+    public String listAccountTransactions(@PathVariable long accountNumber, Model model) {
+        logger.debug("Listing transactions of account \"{}\"", accountNumber);
+        model.addAttribute("product", accountService.listAccountTransactions(accountNumber));
+        logger.debug("Listed transactions of account \"{}\"", accountNumber);
         return "accountTransactions";
     }
 }
