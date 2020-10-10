@@ -1,12 +1,13 @@
 package com.walid.services;
 
-import java.util.List;
+import java.util.Set;
 
 import com.walid.model.Account;
+import com.walid.model.Transaction;
 
 public interface AccountService {
 
     Iterable<Account> listAllAccounts();
 
-    List<Object> listAccountTransactions(long id);
+    Set<Transaction> listAccountTransactions(long accountNumber);
 }

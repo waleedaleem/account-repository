@@ -16,7 +16,7 @@ import com.walid.services.AccountService;
 @RequestMapping("/accounts")
 public class AccountController {
 
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
 
     private AccountService accountService;
 
@@ -36,9 +36,9 @@ public class AccountController {
 
     @GetMapping("/{accountNumber}")
     public String listAccountTransactions(@PathVariable long accountNumber, Model model) {
-        logger.debug("Listing transactions of account \"{}\"", accountNumber);
-        model.addAttribute("product", accountService.listAccountTransactions(accountNumber));
-        logger.debug("Listed transactions of account \"{}\"", accountNumber);
+        logger.debug("Listing transactions of account Id \"{}\"", accountNumber);
+        model.addAttribute("transactions", accountService.listAccountTransactions(accountNumber));
+        logger.debug("Listed transactions of account Id \"{}\"", accountNumber);
         return "accountTransactions";
     }
 }

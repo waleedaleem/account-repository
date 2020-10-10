@@ -11,3 +11,21 @@ entity Account {
 enum AccountType {
 	SAVINGS, CURRENT
 }
+
+entity Transaction {
+	id Long,
+	currency Currency
+	creditAmount BigDecimal,
+	debitAmount BigDecimal,
+	transactionType TransactionType,
+	valueDate Date,
+	narrative String
+}
+
+enum TransactionType {
+	DEBIT, CREDIT
+}
+
+relationship ManyToOne {
+	Transaction{accountNumber} to Account
+}

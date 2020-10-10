@@ -13,7 +13,7 @@
     <artifactId>account-list</artifactId>
     <version>1.0.0</version>
     <name>account-list</name>
-    <description>A Spring Boot project loading, persisting and retrieving sample transactions
+    <description>A Spring MVC project loading, persisting and retrieving sample transactions
     </description>
 
     <properties>
@@ -58,12 +58,7 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
-            <version>3.3.6</version>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>jquery</artifactId>
-            <version>3.5.1</version>
+            <version>4.3.1</version>
         </dependency>
 
         <dependency>

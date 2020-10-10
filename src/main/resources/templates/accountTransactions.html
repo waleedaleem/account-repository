@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<script>
+    function rowClicked() {
+        location.href = "/accounts";
+    }
+</script>
+
+<head>
+    <title>Account Transactions List</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}" />
+</head>
+<body>
+    <div class="container-fluid" style="margin-top: 20px;">
+        <h2 class="text-center"><b>Account Transactions List</b></h2>
+        <br/>
+
+        <table class="table table-hover">
+            <thead class="thead-inverse">
+            <tr>
+                <th>Account Number</th>
+                <th>Account Name</th>
+                <th>Value Date</th>
+                <th>Currency</th>
+                <th>Debit Amount</th>
+                <th>Credit Amount</th>
+                <th>Debit/Credit</th>
+                <th>Narrative</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="transaction : ${transactions}" style="cursor: pointer"
+                th:onclick="'javascript:rowClicked();'">
+                <td th:text="${transaction.account.accountNumber}"/>
+                <td th:text="${transaction.account.accountName}"/>
+                <td th:text="${transaction.valueDate}"/>
+                <td th:text="${transaction.currency}"/>
+                <td th:align="right" th:text="${transaction.debitAmount}"/>
+                <td th:align="right" th:text="${transaction.creditAmount}"/>
+                <td th:text="${transaction.transactionType}"></td>
+                <td th:text="${transaction.narrative}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
