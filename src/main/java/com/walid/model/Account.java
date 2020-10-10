@@ -27,7 +27,7 @@ public class Account implements Serializable {
     @Enumerated(EnumType.STRING)
     private AccountType accountType;
 
-    @Past
+    @Past(message = "Balance date should be in the past")
     private LocalDate balanceDate;
     private Currency currency;
     private BigDecimal balance;

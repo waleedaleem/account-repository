@@ -1,0 +1,13 @@
+
+entity Account {
+	accountNumber Long,
+	accountName String,
+	accountType AccountType,
+	balance BigDecimal,
+	balanceDate Date,
+	currency Currency
+}
+
+enum AccountType {
+	SAVINGS, CURRENT
+}
