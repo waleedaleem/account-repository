@@ -18,8 +18,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.PositiveOrZero;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,14 +42,14 @@ public class Transaction implements Serializable {
     @JoinColumn(name = "account_number")
     private Account account;
 
-    @Past(message = "Transaction date should be in the past")
+    @PastOrPresent(message = "Transaction date can not be in the future")
     private LocalDate valueDate;
     private Currency currency;
 
-    @Positive
+    @PositiveOrZero(message = "Transaction amount can not be -ve")
     private BigDecimal debitAmount;
 
-    @Positive
+    @PositiveOrZero(message = "Transaction amount can not be -ve")
     private BigDecimal creditAmount;
 
     @Enumerated(EnumType.STRING)
@@ -89,8 +89,8 @@ public class Transaction implements Serializable {
     }
 
     public void setDebitAmount(BigDecimal debitAmount) {
-        this.debitAmount = debitAmount;
-        if (debitAmount != null) {
+        if (debitAmount != null && debitAmount.compareTo(ZERO) > 0) {
+            this.debitAmount = debitAmount;
             transactionType = TransactionType.DEBIT;
         }
         ensureOnlyOneAmountSet();
@@ -101,8 +101,8 @@ public class Transaction implements Serializable {
     }
 
     public void setCreditAmount(BigDecimal creditAmount) {
-        this.creditAmount = creditAmount;
-        if (creditAmount != null) {
+        if (creditAmount != null && creditAmount.compareTo(ZERO) > 0) {
+            this.creditAmount = creditAmount;
             transactionType = TransactionType.CREDIT;
         }
         ensureOnlyOneAmountSet();
