@@ -36,5 +36,5 @@ INSERT INTO transaction (account_number, currency, credit_amount, debit_amount, 
                          value_date, narrative, version)
 VALUES (001, 'AUD', 1.99, 0.00, 'CREDIT', '2020-10-01', 'A couple of $ deposit', 0),
        (001, 'AUD', 0.00, 1.99, 'DEBIT', '2020-10-02', 'Reverse a previous couple of $ deposit', 0),
-       (002, 'USD', 2.99, 0.00, 'CREDIT', '2020-10-05', 'a credit txn', 0),
-       (003, 'SGD', 3.99, 0.00, 'CREDIT', '2020-10-10', 'a debit txn', 0);
+       (002, 'USD', 2.99, 0.00, 'CREDIT', '2020-10-05', 'A credit transaction', 0),
+       (003, 'SGD', 3.99, 0.00, 'CREDIT', '2020-10-10', 'A debit transaction', 0);

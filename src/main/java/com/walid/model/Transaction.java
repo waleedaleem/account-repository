@@ -116,7 +116,7 @@ public class Transaction implements Serializable {
         if (ZERO.compareTo(creditAmount) != 0 && ZERO.compareTo(debitAmount) != 0) {
             String msg = "Transaction's credit and debit amounts can not be set at the same time";
             RuntimeException e = new IllegalArgumentException(msg);
-            logger.warn(msg, e);
+            logger.warn(msg);
             throw e;
         }
     }
