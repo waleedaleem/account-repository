@@ -34,7 +34,7 @@
                 th:onclick="'javascript:rowClicked();'">
                 <td th:text="${transaction.account.accountNumber}"/>
                 <td th:text="${transaction.account.accountName}"/>
-                <td th:text="${transaction.valueDate}"/>
+                <td th:text="${transaction.formatValueDate()}"/>
                 <td th:text="${transaction.currency}"/>
                 <td th:align="right" th:text="${transaction.debitAmount}"/>
                 <td th:align="right" th:text="${transaction.creditAmount}"/>

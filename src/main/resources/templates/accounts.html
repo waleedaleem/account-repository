@@ -33,7 +33,7 @@
                 <td th:text="${account.accountNumber}"/>
                 <td th:text="${account.accountName}"/>
                 <td th:text="${account.accountType}"/>
-                <td th:text="${account.balanceDate}"/>
+                <td th:text="${account.formatBalanceDate()}"/>
                 <td th:text="${account.currency}"/>
                 <td th:align="right" th:text="${account.balance}"></td>
             </tr>

@@ -5,6 +5,7 @@ import static java.math.BigDecimal.ZERO;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Currency;
 import java.util.Objects;
 
@@ -23,9 +24,13 @@ import javax.validation.constraints.PositiveOrZero;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 @Entity
 public class Transaction implements Serializable {
+
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(
+            "dd/MM/yyyy");
 
     private static final Logger logger = LoggerFactory.getLogger(Transaction.class);
 
@@ -78,6 +83,10 @@ public class Transaction implements Serializable {
 
     public LocalDate getValueDate() {
         return valueDate;
+    }
+
+    public String formatValueDate() {
+        return valueDate.format(DATE_FORMATTER);
     }
 
     public Currency getCurrency() {
@@ -153,6 +162,12 @@ public class Transaction implements Serializable {
     }
 
     enum TransactionType {
-        DEBIT, CREDIT
+
+        DEBIT, CREDIT;
+
+        @Override
+        public String toString() {
+            return StringUtils.capitalize(super.toString().toLowerCase());
+        }
     }
 }

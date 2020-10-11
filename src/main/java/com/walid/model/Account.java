@@ -3,6 +3,7 @@ package com.walid.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Currency;
 import java.util.Objects;
 import java.util.Set;
@@ -17,8 +18,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Version;
 import javax.validation.constraints.Past;
 
+import org.springframework.util.StringUtils;
+
 @Entity
 public class Account implements Serializable {
+
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(
+            "dd/MM/yyyy");
 
     private static final long serialVersionUID = -158308464356906721L;
 
@@ -64,6 +70,10 @@ public class Account implements Serializable {
         return balanceDate;
     }
 
+    public String formatBalanceDate() {
+        return balanceDate.format(DATE_FORMATTER);
+    }
+
     public Currency getCurrency() {
         return currency;
     }
@@ -95,6 +105,12 @@ public class Account implements Serializable {
     }
 
     enum AccountType {
-        SAVINGS, CURRENT
+
+        SAVINGS, CURRENT;
+
+        @Override
+        public String toString() {
+            return StringUtils.capitalize(super.toString().toLowerCase());
+        }
     }
 }
