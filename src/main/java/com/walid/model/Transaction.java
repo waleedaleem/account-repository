@@ -1,11 +1,12 @@
 package com.walid.model;
 
+import static com.walid.model.FormatHelper.formatCurrency;
+import static com.walid.model.FormatHelper.formatDate;
 import static java.math.BigDecimal.ZERO;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Currency;
 import java.util.Objects;
 
@@ -28,9 +29,6 @@ import org.springframework.util.StringUtils;
 
 @Entity
 public class Transaction implements Serializable {
-
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(
-            "dd/MM/yyyy");
 
     private static final Logger logger = LoggerFactory.getLogger(Transaction.class);
 
@@ -86,7 +84,7 @@ public class Transaction implements Serializable {
     }
 
     public String formatValueDate() {
-        return valueDate.format(DATE_FORMATTER);
+        return formatDate(valueDate);
     }
 
     public Currency getCurrency() {
@@ -105,6 +103,10 @@ public class Transaction implements Serializable {
         ensureOnlyOneAmountSet();
     }
 
+    public String formatDebitAmount() {
+        return formatCurrency(debitAmount);
+    }
+
     public BigDecimal getCreditAmount() {
         return creditAmount;
     }
@@ -115,6 +117,10 @@ public class Transaction implements Serializable {
             transactionType = TransactionType.CREDIT;
         }
         ensureOnlyOneAmountSet();
+    }
+
+    public String formatCreditAmount() {
+        return formatCurrency(creditAmount);
     }
 
     /**
@@ -156,9 +162,9 @@ public class Transaction implements Serializable {
     @Override
     public String toString() {
         return "Transaction{id=" + id + ", account=" + account.getAccountName() + ", valueDate="
-                + valueDate + ", currency=" + currency + ", debitAmount=" + debitAmount
-                + ", creditAmount=" + creditAmount + ", transactionType=" + transactionType
-                + ", narrative='" + narrative + "'}";
+                + valueDate + ", currency=" + currency + ", debitAmount="
+                + formatCurrency(debitAmount) + ", creditAmount=" + formatCurrency(creditAmount)
+                + ", transactionType=" + transactionType + ", narrative='" + narrative + "'}";
     }
 
     enum TransactionType {

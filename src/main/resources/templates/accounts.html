@@ -35,7 +35,7 @@
                 <td th:text="${account.accountType}"/>
                 <td th:text="${account.formatBalanceDate()}"/>
                 <td th:text="${account.currency}"/>
-                <td th:align="right" th:text="${account.balance}"></td>
+                <td th:align="right" th:text="${account.formatBalance()}"></td>
             </tr>
             </tbody>
         </table>

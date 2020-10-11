@@ -1,9 +1,11 @@
 package com.walid.model;
 
+import static com.walid.model.FormatHelper.formatCurrency;
+import static com.walid.model.FormatHelper.formatDate;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Currency;
 import java.util.Objects;
 import java.util.Set;
@@ -22,9 +24,6 @@ import org.springframework.util.StringUtils;
 
 @Entity
 public class Account implements Serializable {
-
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(
-            "dd/MM/yyyy");
 
     private static final long serialVersionUID = -158308464356906721L;
 
@@ -71,7 +70,7 @@ public class Account implements Serializable {
     }
 
     public String formatBalanceDate() {
-        return balanceDate.format(DATE_FORMATTER);
+        return formatDate(balanceDate);
     }
 
     public Currency getCurrency() {
@@ -80,6 +79,10 @@ public class Account implements Serializable {
 
     public BigDecimal getBalance() {
         return balance;
+    }
+
+    public String formatBalance() {
+        return formatCurrency(balance);
     }
 
     @Override
@@ -101,7 +104,7 @@ public class Account implements Serializable {
     public String toString() {
         return "Account{accountNumber=" + accountNumber + ", accountName='" + accountName
                 + "', accountType=" + accountType + ", balanceDate=" + balanceDate + ", currency="
-                + currency + ", balance=" + balance + "}";
+                + currency + ", balance=" + formatCurrency(balance) + "}";
     }
 
     enum AccountType {
